@@ -4,6 +4,7 @@ import "./App.css";
 
 import HomePage from "./pages/homepage.components/HomePage.component.jsx";
 import { ShopPage } from "./pages/shop/shop.component";
+import { HeaderComponent } from "../src/components/HeaderComponent/HeaderComponent";
 
 /*
 //demo for the Routing for Hats page
@@ -17,12 +18,13 @@ const HatsPage = () => (
 
 function App() {
   return (
-    <Switch>
-      <div className="App">
+    <div className="App">
+      <HeaderComponent></HeaderComponent>
+      <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
-      </div>
-    </Switch>
+      </Switch>
+    </div>
   );
 }
 
