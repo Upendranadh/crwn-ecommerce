@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./HeaderComponent.scss";
 import { ReactComponent as Logo } from "../../Assets/crown.svg";
+import { auth } from "../../FireBase/FireBase.util";
 
-export const HeaderComponent = () => {
+export const HeaderComponent = ({ currentUser }) => {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -16,9 +17,16 @@ export const HeaderComponent = () => {
         <Link className="option" to="/shop">
           CONTACT
         </Link>
-        <Link className="option" to="/shop">
-          SIGN IN
-        </Link>
+
+        {currentUser ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            SignOut
+          </div>
+        ) : (
+          <Link className="option" to="/signin">
+            SIGN IN
+          </Link>
+        )}
       </div>
     </div>
   );
