@@ -13,6 +13,30 @@ const config = {
   measurementId: "G-86FY738HRZ",
 };
 
+export const CreateUserProfileDocument = async (userAuth, additonalData) => {
+  if (!userAuth) return;
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    const { displayName, email } = userAuth;
+    const createDate = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createDate,
+        ...additonalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
+    }
+  }
+  return userRef;
+};
+
 firebase.initializeApp(config);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
