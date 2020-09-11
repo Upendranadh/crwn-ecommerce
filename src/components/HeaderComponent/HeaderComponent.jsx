@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import "./HeaderComponent.scss";
 import { ReactComponent as Logo } from "../../Assets/crown.svg";
 import { auth } from "../../FireBase/FireBase.util";
 
-export const HeaderComponent = ({ currentUser }) => {
+const HeaderComponent = ({ currentUser }) => {
+  // console.log(currentUser);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -31,3 +33,9 @@ export const HeaderComponent = ({ currentUser }) => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(HeaderComponent);
